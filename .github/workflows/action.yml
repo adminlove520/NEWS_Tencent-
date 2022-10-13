@@ -31,7 +31,7 @@ jobs:
         #   TELEGRAM_KEY: ${{ secrets.TELEGRAM_KEY }}
         #   MAIL_KEY: ${{ secrets.MAIL_KEY }}
         run: |
-          chmod=+x day-task.py
+          chmod 777 day-task.py
           python3 day_task.py
 
       - name: Commit
