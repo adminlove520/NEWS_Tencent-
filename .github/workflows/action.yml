@@ -39,7 +39,7 @@ jobs:
           git diff
           git config --global user.email firmianay@gmail.com
           git config --global user.name firmianay
-          git add archive today.md
+          git add archive
           git commit -m "每日腾讯新闻热点（`date +'%Y-%m-%d'`）"
 
       - name: Push changes
