@@ -19,7 +19,7 @@ jobs:
           python-version: '3.x'
       - name: Install dependencies
         run: |
-          git update-index --chmod=+x install.sh
+          git update-index --chmod 777 install.sh
           ./install.sh
 
       - name: Push articles
