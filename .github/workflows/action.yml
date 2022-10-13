@@ -37,8 +37,8 @@ jobs:
       - name: Commit
         run: |
           git diff
-          git config --global user.email firmianay@gmail.com
-          git config --global user.name firmianay
+          git config --global user.email 791751568@qq.com
+          git config --global user.name adminlove520
           git add archive
           git commit -m "每日腾讯新闻热点（`date +'%Y-%m-%d'`）"
 
