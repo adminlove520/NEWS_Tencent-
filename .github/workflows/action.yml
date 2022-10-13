@@ -18,7 +18,9 @@ jobs:
         with:
           python-version: '3.x'
       - name: Install dependencies
-        run: ./install.sh
+        run: |
+          git update-index --chmod=+x install.sh
+          ./install.sh
 
       - name: Push articles
         # env:
@@ -28,7 +30,9 @@ jobs:
         #   QQ_KEY: ${{ secrets.QQ_KEY }}
         #   TELEGRAM_KEY: ${{ secrets.TELEGRAM_KEY }}
         #   MAIL_KEY: ${{ secrets.MAIL_KEY }}
-        run: python3 day_task.py
+        run: |
+          git update-index --chmod=+x day-task.py
+          python3 day_task.py
 
       - name: Commit
         run: |
@@ -36,7 +40,7 @@ jobs:
           git config --global user.email firmianay@gmail.com
           git config --global user.name firmianay
           git add archive today.md
-          git commit -m "每日安全资讯（`date +'%Y-%m-%d'`）"
+          git commit -m "每日腾讯新闻热点（`date +'%Y-%m-%d'`）"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
