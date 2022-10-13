@@ -19,8 +19,8 @@ jobs:
           python-version: '3.x'
       - name: Install dependencies
         run: |
-          chmod 777 install.sh
-          ./install.sh
+          #chmod 777 install.sh
+          pip install -r requirements.txt
 
       - name: Push articles
         # env:
