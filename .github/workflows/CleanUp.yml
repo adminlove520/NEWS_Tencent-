@@ -1,0 +1,40 @@
+name: Cleanup Archive
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      # - name: Run Cleanup Script
+      #   run: python cleanup_archive.py
+      run: |
+          chmod 777 cleanup_archive.py
+          python3 cleanup_archive.py
+
+      - name: Commit
+        run: |
+          # git diff
+          git config --global user.email 791751568@qq.com
+          git config --global user.name adminlove520
+          git add .
+          git commit -m "清理任务已成功:（`date +'%Y-%m-%d'`）"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
