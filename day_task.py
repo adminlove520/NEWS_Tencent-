@@ -1,5 +1,7 @@
 #用于对网页发送请求
 import requests
+import datetime
+import os
 #处理数据用的
 from pyquery import PyQuery as pq
 #操作word的库
@@ -15,6 +17,20 @@ headers={
 res=requests.get(url,headers=headers).json()
 #从data,list键值中取出数据
 data_list=res['data']['list']
+#获取当前日期
+now = datetime.datetime.now()
+#格式化日期
+date_str = now.strftime("%Y-%m-%d")
+#创建日期文件夹
+folder_path = './archive/' + date_str + '/'
+os.makedirs(folder_path, exist_ok=True)
+
+#清空archive文件夹下的所有文件
+folder_path = './archive/'
+for file_name in os.listdir(folder_path):
+    file_path = os.path.join(folder_path, file_name)
+    if os.path.isfile(file_path):
+        os.remove(file_path)
 #遍历列表
 for data in data_list:
   file = Document()
@@ -36,5 +52,12 @@ for data in data_list:
 
     para=file.add_paragraph()
     para.add_run(text="  "+news_contents)
+    # 修改为按年-月-日-article_title.docx归档
+    # 获取当前日期
+    now = datetime.datetime.now()
+    # 格式化日期
+    date_str = now.strftime("%Y-%m-%d")
+    # 保存到本地
+    file.save(folder_path + article_title + '.docx')
     #保存到本地
-    file.save('./archive/'+article_title+'.docx')
+    # file.save('./archive/'+article_title+'.docx')
